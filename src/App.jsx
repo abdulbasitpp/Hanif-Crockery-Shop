@@ -2,10 +2,10 @@ import "./index.css";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./Comp/Navbar";
 import Footer from "./Comp/Footer"; 
-import Home from "./Pages/home";
-import Gallery from "./Pages/gallery";
-import About from "./Pages/about";
-import Contact from "./Pages/contact";
+import Home from "./Pages/Home";
+import Gallery from "./Pages/Gallery";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
 import { useState, useEffect } from "react";
 
 function App() {

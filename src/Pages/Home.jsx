@@ -5,17 +5,19 @@ import { Link } from "react-router-dom";
 export default function Home({ language, darkMode }) {
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const images = [
-    "/Shope pic1.jpg",
-    "/Shope pic2.jpg",
-    "/Shope pic3.jpg",
-    "/Shope pic4.jpg",
-    "/Shope pic5.jpg",
-    "/Shope pic6.jpg",
-    "/Shope pic7.jpg",
-    "/Shope pic8.jpg",
-    "/Shope pic9.jpg",
-  ];
+const images = [
+  "/Shope-pic1.jpg",
+  "/Shope-pic2.jpg",
+  "/Shope-pic3.jpg",
+  "/Shope-pic4.jpg",
+  "/Shope-pic5.jpg",
+  "/Shope-pic6.jpg",
+  "/Shope-pic7.jpg",
+  "/Shope-pic8.jpg",
+  "/Shope-pic9.jpg",
+  
+];
+
 
   // 🔒 LOCK / UNLOCK SCROLL
   useEffect(() => {

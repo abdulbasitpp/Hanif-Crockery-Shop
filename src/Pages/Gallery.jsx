@@ -24,12 +24,23 @@ export default function Gallery({ language, darkMode }) {
     {
       title: { en: "Dinner Sets", ur: "ڈنر سیٹس" },
       images: [
-        "/Dinner set1.jpg",
-        "/Dinner set2.jpg",
-        "/Dinner set3.jpg",
-        "/Dinner set4.jpg",
-        "/Dinner set5.jpg",
-        "/Dinner set6.jpg",
+        "/1-1.jpg",
+        "/1-2.jpg",
+        "/1-3.jpg",
+        "/1-4.jpg",
+        "/1-5.jpg",
+        "/1-6.jpg",
+        "/1-7.jpg",
+        "/1-8.jpg",
+        "/1-9.jpg",
+        "/Dinner-set5.jpg",
+        "/set99.jpg",
+        "/Set1.jpg",
+
+        
+       
+       
+
       ],
     },
     {
@@ -40,7 +51,16 @@ export default function Gallery({ language, darkMode }) {
         "/cups3.jpg",
         "/cups4.jpg",
         "/cups5.jpg",
-        "/cups6.jpg",
+        "/chai2.jpg",
+        "/cupme.jpg",
+        "/cupme1.jpg",
+        "/chai4.jpg",
+        "/chai44.jpg",
+        "/chai55.jpg",
+        "/Chai.jpg",
+        
+
+
       ],
     },
     {
@@ -52,6 +72,16 @@ export default function Gallery({ language, darkMode }) {
         "/plate4.jpeg",
         "/plate5.jpeg",
         "/plate6.jpeg",
+        "/plate7.jpeg",
+        "/plates.jpg",
+        "/plates3.webp",
+        "/plates2.jpg",
+        "/plates1.jpg",
+        "/plate11.jpg",
+
+
+
+
       ],
     },
     {
@@ -63,6 +93,14 @@ export default function Gallery({ language, darkMode }) {
         "/tools5.jpg",
         "/tools6.jpg",
         "/tools7.jpg",
+        "/tools9.avif",
+        "/tools10.jpg",
+        "/kitchen3.jpg",
+        "/kitchen4.jpg",  
+        "/kitchen5.jpg",
+        "/kitchen6.jpg",
+
+
       ],
     },
   ];
@@ -125,7 +163,7 @@ export default function Gallery({ language, darkMode }) {
           <section key={index} className="space-y-8">
             {/* CATEGORY TITLE */}
             <motion.h2
-              className={`inline-block px-6 py-3 rounded-2xl text-2xl font-extrabold
+              className={`inline-block px-6 py-3 rounded-xl text-2xl font-extrabold
               backdrop-blur-md shadow-xl
               ${
                 darkMode
@@ -165,7 +203,7 @@ export default function Gallery({ language, darkMode }) {
                   <img
                     src={img}
                     alt={language === "en" ? category.title.en : category.title.ur}
-                    className="w-full h-[260px] sm:h-[300px] object-cover"
+                    className="w-full h-[300px] sm:h-[300px] object-cover"
                   />
 
                   {/* OVERLAY (ILLITERATE FRIENDLY) */}
@@ -193,7 +231,7 @@ export default function Gallery({ language, darkMode }) {
             animate="visible"
             exit="exit"
           >
-            <motion.div className="relative max-w-6xl w-full">
+            <motion.div className="relative max-w-7xl w-full h-full">
               <img
                 src={selectedImage}
                 alt="Full View"

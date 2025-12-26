@@ -7,7 +7,7 @@ export default function About({ language, darkMode }) {
   const images = [
     { src: "/Family.jpg", title: { en: "Owners", ur: "مالکان" } },
     { src: "/Arshad.jpg", title: { en: "Arshad Ali", ur: "ارشد علی" } },
-    { src: "/Shahid (2).jpg", title: { en: "Shahid Ali", ur: "شاہد علی  " } },
+    { src: "/Shahid.jpg", title: { en: "Shahid Ali", ur: "شاہد علی  " } },
   ];
 
   /* 🔒 Scroll lock + ESC close */
