@@ -105,7 +105,7 @@ export default function Contact({ language, darkMode }) {
       label: isUrdu ? "واٹس ایپ" : "WhatsApp",
       value: (
         <a
-          href="https://wa.me/923001234567"
+          href="https://wa.me/+923117351680"
           className="underline font-bold"
           dir="ltr"
           style={{ unicodeBidi: "isolate" }}
