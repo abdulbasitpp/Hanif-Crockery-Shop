@@ -114,10 +114,7 @@ export default function Footer({ language, darkMode, toggleDarkMode }) {
                   : "Nazeer Khan Market, Shop #5, Ziarat Road, Pabbi"}
               </span>
             </div>
-            <div className="flex items-center gap-2">
-              <FiMail className="text-blue-400" />
-              <span dir="ltr">info@hanifcrockery.com</span>
-            </div>
+            
           </div>
         </div>
       </div>

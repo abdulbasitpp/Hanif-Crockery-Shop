@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiMapPin, FiPhone } from "react-icons/fi";
 
 export default function Contact({ language, darkMode }) {
   const [showCard, setShowCard] = useState(true);
+  const [showOptions, setShowOptions] = useState(false); // For WhatsApp dropdown
   const isUrdu = language === "ur";
+  const dropdownRef = useRef(null);
 
   /* PARALLAX */
   const [scrollY, setScrollY] = useState(0);
@@ -13,6 +15,17 @@ export default function Contact({ language, darkMode }) {
     const onScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* Close dropdown when clicking outside */
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowOptions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   /* CARD ANIMATION */
@@ -29,6 +42,11 @@ export default function Contact({ language, darkMode }) {
       transition: { type: "spring", stiffness: 150 },
     },
   };
+
+  const whatsappContacts = [
+    { name: isUrdu ? "ارشد علی" : "Arshad Ali", number: "923117351680" },
+    { name: isUrdu ? "شاہد علی" : "Shahid Ali", number: "923130879932" },
+  ];
 
   return (
     <section
@@ -48,7 +66,7 @@ export default function Contact({ language, darkMode }) {
         {isUrdu ? "رابطہ برائے معلومات" : "Contact Information"}
       </motion.h1>
 
-      {/* TRUST STATS (ILLITERATE FRIENDLY) */}
+      {/* TRUST STATS */}
       <motion.div
         className="grid grid-cols-3 gap-4 max-w-3xl mx-auto mb-14 text-center"
         initial={{ opacity: 0 }}
@@ -71,76 +89,95 @@ export default function Contact({ language, darkMode }) {
 
       {/* CONTACT CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 text-center">
-  {[
-    {
-      icon: <FiPhone className="text-green-500 text-3xl" />,
-      label: isUrdu ? "فون" : "Phone",
-      value: (
-        <span
-          dir="ltr"
-          className="font-bold tracking-wider inline-block"
-          style={{ unicodeBidi: "isolate" }}
-        >
-          0311 7351680
-        </span>
-      ),
-      name: isUrdu ? "ارشد علی" : "Arshad Ali",
-    },
-    {
-      icon: <FiPhone className="text-blue-500 text-3xl" />,
-      label: isUrdu ? "فون" : "Phone",
-      value: (
-        <span
-          dir="ltr"
-          className="font-bold tracking-wider inline-block"
-          style={{ unicodeBidi: "isolate" }}
-        >
-          0313 0879932
-        </span>
-      ),
-      name: isUrdu ? "شاہد علی" : "Shahid Ali",
-    },
-    {
-      icon: <FaWhatsapp className="text-green-400 text-3xl" />,
-      label: isUrdu ? "واٹس ایپ" : "WhatsApp",
-      value: (
-        <a
-          href="https://wa.me/+923117351680"
-          className="underline font-bold"
-          dir="ltr"
-          style={{ unicodeBidi: "isolate" }}
-        >
-          {isUrdu ? "چیٹ کریں" : "Chat Now"} ✅
-        </a>
-      ),
-    },
-    {
-      icon: <FiMapPin className="text-red-500 text-3xl" />,
-      label: isUrdu ? "پتہ" : "Address",
-      value: isUrdu
-        ? "نذیر خان مارکیٹ، دکان نمبر 5، زیارت روڈ، پبی"
-        : "Nazeer Khan Market, Shop #5, Ziarat Road, Pabbi",
-    },
-  ].map((item, i) => (
-    <motion.div
-      key={i}
-      custom={i}
-      variants={cardVariant}
-      initial="hidden"
-      whileInView="visible"
-      whileHover="hover"
-      className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-2xl"
-    >
-      {item.icon}
-      <p className="mt-3 text-lg sm:text-xl font-extrabold">
-        {item.label}
-      </p>
-      <p className="font-bold">{item.value}</p>
-      {item.name && <p className="opacity-80">{item.name}</p>}
-    </motion.div>
-  ))}
-</div>
-
+        {[
+          {
+            icon: <FiPhone className="text-green-500 text-3xl" />,
+            label: isUrdu ? "فون" : "Phone",
+            value: (
+              <span
+                dir="ltr"
+                className="font-bold tracking-wider inline-block"
+                style={{ unicodeBidi: "isolate" }}
+              >
+                0311 7351680
+              </span>
+            ),
+            name: isUrdu ? "ارشد علی" : "Arshad Ali",
+          },
+          {
+            icon: <FiPhone className="text-blue-500 text-3xl" />,
+            label: isUrdu ? "فون" : "Phone",
+            value: (
+              <span
+                dir="ltr"
+                className="font-bold tracking-wider inline-block"
+                style={{ unicodeBidi: "isolate" }}
+              >
+                0313 0879932
+              </span>
+            ),
+            name: isUrdu ? "شاہد علی" : "Shahid Ali",
+          },
+          {
+            icon: <FaWhatsapp className="text-green-400 text-3xl cursor-pointer" />,
+            label: isUrdu ? "واٹس ایپ" : "WhatsApp",
+            value: (
+              <div ref={dropdownRef} className="relative inline-block">
+                <span
+                  className="underline font-bold cursor-pointer"
+                  onClick={() => setShowOptions(!showOptions)}
+                  dir="ltr"
+                  style={{ unicodeBidi: "isolate" }}
+                >
+                  {isUrdu ? "چیٹ کریں" : "Chat Now"} ✅
+                </span>
+                {showOptions && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute mt-2 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-2 z-50"
+                  >
+                    {whatsappContacts.map((c) => (
+                      <a
+                        key={c.number}
+                        href={`https://wa.me/${c.number}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-4 py-2 hover:bg-green-100 dark:hover:bg-gray-700 rounded-md"
+                      >
+                        {c.name}
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
+            ),
+          },
+          {
+            icon: <FiMapPin className="text-red-500 text-3xl" />,
+            label: isUrdu ? "پتہ" : "Address",
+            value: isUrdu
+              ? "نذیر خان مارکیٹ، دکان نمبر 5، زیارت روڈ، پبی"
+              : "Nazeer Khan Market, Shop #5, Ziarat Road, Pabbi",
+          },
+        ].map((item, i) => (
+          <motion.div
+            key={i}
+            custom={i}
+            variants={cardVariant}
+            initial="hidden"
+            whileInView="visible"
+            whileHover="hover"
+            className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-2xl"
+          >
+            {item.icon}
+            <p className="mt-3 text-lg sm:text-xl font-extrabold">{item.label}</p>
+            <p className="font-bold">{item.value}</p>
+            {item.name && <p className="opacity-80">{item.name}</p>}
+          </motion.div>
+        ))}
+      </div>
 
       {/* MAP */}
       <motion.div
@@ -153,7 +190,6 @@ export default function Contact({ language, darkMode }) {
           className="absolute inset-0 w-full h-full"
           loading="lazy"
         />
-
         {/* FLOATING LOCATION CARD */}
         {showCard && (
           <motion.div
@@ -161,8 +197,8 @@ export default function Contact({ language, darkMode }) {
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.04 }}
             className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2
-            bg-white/90 dark:bg-gray-800/90 backdrop-blur-md
-            rounded-2xl px-6 py-4 shadow-xl"
+              bg-white/90 dark:bg-gray-800/90 backdrop-blur-md
+              rounded-2xl px-6 py-4 shadow-xl"
           >
             <p className="font-bold flex items-center gap-2">
               <FiMapPin className="text-red-500" />
